@@ -113,10 +113,10 @@ def J_se(h, theta, X, Y, derivative=False, derivative_dimension=0):
     with respect to the derivative_dimension's parameter is returned, otherwise 
     the squared error as a float
     '''
-    N  = X.shape[0]
+    N  = len(X)
     J = h(X, theta) - Y
     if not derivative:
-        return (1/2*N)*np.sum(np.square(J))
+        return 1/(2*N)*np.sum(np.square(J))
     else:  # partial derivatives of the cost function are expected as a result
         if derivative_dimension == 0:
             return 1/N*np.sum(J)
@@ -147,6 +147,7 @@ def batch_gradient_descent(initial_theta, alpha, cost_function, hypothesis_funct
 
     line, point = create_plot(cost_function, hypothesis_function, X, Y)
     while True:
+        last_cost = current_cost
         theta_0_opt = optimized_theta[0] - alpha * cost_function(hypothesis_function, optimized_theta, X, Y, True, 0)
         theta_1_opt = optimized_theta[1] - alpha * cost_function(hypothesis_function, optimized_theta, X, Y, True, 1)
         optimized_theta = (theta_0_opt, theta_1_opt)
@@ -154,7 +155,6 @@ def batch_gradient_descent(initial_theta, alpha, cost_function, hypothesis_funct
         update_plot_lr(X, Y, optimized_theta, current_cost, line, point)
         if abs(last_cost - current_cost) < CONVERGENCE_DELTA:
             break;
-        last_cost = current_cost
 
     return optimized_theta
 
