@@ -115,13 +115,17 @@ def J_se(h, theta, X, Y, derivative=False, derivative_dimension=0):
     '''
     N  = X.shape[0]
     if not derivative:
-        return 1/(2*N)*np.sum(np.square(h(X, theta) - Y))
+        return (1/2*N)*np.sum(np.square(h(X, theta) - Y))
     else:  # partial derivatives of the cost function are expected as a result
+        # Iterative Variant
         dJ = np.zeros(2)
         for i in range(N):
             dJ[0] += h(X[i], theta) - Y[i]
             dJ[1] += (h(X[i], theta) - Y[i])*X[i]
         return 1/N*dJ[derivative_dimension]
+        # Vectorized variant (shorter but not as readable)
+        # J = 1/N*(h(X, theta) - Y)
+        # return np.sum(J) if derivative_dimension == 0 else np.dot(J.T, X)
 
 
 ###############################################################################
