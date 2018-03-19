@@ -105,3 +105,4 @@ ENV/
 
 # own ignores
 resource/models/
+/week-02/*.pkl
