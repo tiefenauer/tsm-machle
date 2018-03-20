@@ -106,3 +106,6 @@ ENV/
 # own ignores
 resource/models/
 /week-02/*.pkl
+/week-05/tensorboard/
+/week-05/8_faces_EMB.npz
+/week-05/Data_test_8_faces_no_cut_100_100.hdf5
