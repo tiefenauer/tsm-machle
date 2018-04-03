@@ -1,0 +1,1 @@
+tensorboard --logdir=/d/code/tsm-machle/week-05/tensorboard/mnist
